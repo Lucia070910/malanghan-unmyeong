@@ -3,20 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>말랑한 운명 | 무학여고 솔리언 또래 상담반</title>
+<title>말랑한 운명</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.6/purify.min.js"></script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap');
-
 :root {
-  --cream: #f7f0e5;
-  --paper: #fffaf2;
-  --gold: #b18a4c;
-  --purple: #79648e;
-  --deep: #49395f;
-  --ink: #352c40;
-  --muted: #817687;
-  --line: #e5d8c4;
+  --cream: #faf6ee;
+  --paper: #fffdf8;
+  --gold: #b49a65;
+  --gold-light: #e6d8b8;
+  --purple: #78628e;
+  --ink: #38313d;
+  --muted: #837b86;
+  --line: #e9dfcf;
 }
 
 * {
@@ -25,923 +31,766 @@
 
 body {
   margin: 0;
-  background:
-    radial-gradient(circle at 10% 5%, #fffdf7, transparent 35%),
-    radial-gradient(circle at 90% 30%, #eee5f2, transparent 30%),
-    var(--cream);
+  background: var(--cream);
   color: var(--ink);
   font-family: "Noto Sans KR", sans-serif;
-}
-
-button, input, select {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-}
-
-.container {
-  width: min(100% - 28px, 850px);
-  margin: auto;
-  padding: 30px 0 50px;
+  line-height: 1.75;
 }
 
 header {
   text-align: center;
-  padding: 20px 0 32px;
+  padding: 42px 16px 28px;
 }
 
-.moon {
+.stars {
   color: var(--gold);
-  font-size: 30px;
-  letter-spacing: 8px;
-}
-
-h1, h2, h3 {
-  font-family: "Gowun Batang", serif;
+  letter-spacing: 12px;
+  font-size: 20px;
 }
 
 h1 {
-  color: var(--deep);
+  margin: 8px 0;
+  font-family: "Gowun Batang", serif;
   font-size: clamp(34px, 7vw, 48px);
-  letter-spacing: 3px;
-  margin: 10px 0;
+  color: var(--purple);
 }
 
-.brand {
-  color: var(--muted);
-  font-size: 12px;
-  letter-spacing: 2px;
+.subtitle {
+  color: var(--gold);
+  font-size: 13px;
+  letter-spacing: 1px;
 }
 
 .quote {
-  color: #66586f;
+  margin-top: 18px;
+  color: var(--muted);
   font-family: "Gowun Batang", serif;
-  font-size: 15px;
-  margin-top: 20px;
-  min-height: 25px;
+}
+
+main {
+  width: min(850px, calc(100% - 28px));
+  margin: auto;
+  padding-bottom: 50px;
 }
 
 .panel {
-  background: rgba(255, 250, 242, 0.96);
+  background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 22px;
-  padding: clamp(20px, 4vw, 32px);
-  margin-bottom: 18px;
-  box-shadow: 0 12px 35px #49395f0a;
-}
-
-.eyebrow {
-  color: var(--gold);
-  font-size: 10px;
-  font-weight: bold;
-  letter-spacing: 2px;
-  margin-bottom: 9px;
+  padding: clamp(18px, 5vw, 32px);
+  margin-bottom: 20px;
+  box-shadow: 0 8px 30px #59432108;
 }
 
 h2 {
-  color: var(--deep);
+  margin-top: 0;
+  font-family: "Gowun Batang", serif;
   font-size: 24px;
-  margin: 0 0 20px;
+  color: var(--purple);
 }
 
 h3 {
-  color: var(--deep);
-  font-size: 18px;
-  margin: 0 0 8px;
+  color: var(--purple);
+  font-family: "Gowun Batang", serif;
+}
+
+.description {
+  color: var(--muted);
+  font-size: 13px;
 }
 
 label {
   display: block;
-  font-size: 13px;
+  margin: 15px 0 6px;
+  font-size: 14px;
   font-weight: 600;
-  margin: 14px 0 7px;
 }
 
 input, select {
   width: 100%;
-  padding: 13px;
+  min-height: 45px;
+  padding: 10px 12px;
   border: 1px solid var(--line);
-  border-radius: 11px;
-  background: #fffdf8;
+  border-radius: 10px;
+  background: white;
   color: var(--ink);
+  font: inherit;
 }
 
-input:focus, select:focus {
-  outline: 2px solid #79648e40;
-  border-color: var(--purple);
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.grid-three {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.gender-options {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.gender-options label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid var(--line);
-  background: #fffdf8;
-  border-radius: 30px;
-  padding: 10px 14px;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.gender-options input {
+input[type="checkbox"] {
   width: auto;
-  margin: 0;
+  min-height: auto;
 }
 
-.help {
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.8;
-  margin-top: 12px;
-}
-
-.divider {
-  height: 1px;
-  background: var(--line);
-  margin: 28px 0;
-}
-
-.topic-grid {
+.row {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
-.topic {
-  text-align: left;
-  padding: 15px 12px;
-  min-height: 95px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: #fffdf8;
-  color: var(--ink);
-}
-
-.topic strong {
-  display: block;
-  margin-bottom: 7px;
-  font-size: 14px;
-}
-
-.topic span {
-  display: block;
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.6;
-}
-
-.topic.active {
-  background: #f0e9f4;
-  border-color: var(--purple);
-  box-shadow: inset 0 0 0 1px var(--purple);
+button {
+  cursor: pointer;
+  font: inherit;
 }
 
 .primary {
+  display: block;
   width: 100%;
-  padding: 16px;
-  border: none;
-  border-radius: 13px;
-  background: var(--deep);
+  margin-top: 24px;
+  padding: 14px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--purple);
   color: white;
-  font-weight: bold;
-  margin-top: 22px;
-  letter-spacing: 1px;
-}
-
-.primary:hover {
-  opacity: 0.9;
+  font-weight: 600;
 }
 
 .secondary {
-  flex: 1;
-  padding: 12px;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  color: var(--deep);
-}
-
-.hidden {
-  display: none !important;
+  padding: 10px 14px;
+  border: 1px solid var(--gold-light);
+  border-radius: 10px;
+  background: white;
+  color: var(--purple);
 }
 
 .notice {
-  padding: 14px;
-  border-radius: 13px;
-  background: #f0e9f4;
-  color: #594a67;
+  margin-top: 15px;
+  padding: 13px;
+  border-radius: 10px;
+  background: #f6f0e5;
+  color: #74685c;
   font-size: 12px;
-  line-height: 1.8;
 }
 
-.pillars {
-  width: 100%;
-  border-spacing: 5px;
-  text-align: center;
-}
-
-.pillars th {
-  color: var(--muted);
-  font-size: 12px;
-  padding: 8px 2px;
-}
-
-.pillars td {
-  background: #f7f0e5;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 12px 5px;
-}
-
-.pillars .hanja {
-  display: block;
-  font-family: "Gowun Batang", serif;
-  font-size: 24px;
-  color: var(--deep);
-}
-
-.pillars small {
-  display: block;
-  font-size: 10px;
-  color: var(--muted);
-  margin-top: 5px;
-}
-
-.table-scroll {
-  overflow-x: auto;
-}
-
-.animal-card {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-  padding: 18px;
-  border: 1px solid var(--line);
-  border-radius: 15px;
-  background: linear-gradient(130deg, #f0e9f4, #fff7e8);
-}
-
-.animal-icon {
-  font-size: 40px;
-}
-
-.animal-card p,
-.result-card p {
+#status, #qrStatus {
+  margin-top: 15px;
+  color: var(--purple);
   font-size: 13px;
-  line-height: 1.9;
-  margin: 8px 0 0;
-  color: #544a5b;
+  overflow-wrap: anywhere;
 }
 
-.result-card {
-  padding: 18px;
-  border: 1px solid var(--line);
-  border-radius: 15px;
-  background: #fffdf8;
+.checkline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-top: 12px;
 }
 
-.mini-label {
-  color: var(--gold);
-  font-size: 10px;
-  font-weight: bold;
-  letter-spacing: 1.5px;
-  margin-bottom: 8px;
+.checkline label {
+  margin: 0;
+  font-weight: 400;
 }
 
-.tags {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
+#resultSection {
+  display: none;
+}
+
+.result-card {
+  padding: clamp(15px, 4vw, 28px);
+  background: #fffdf8;
+  border: 1px solid var(--gold-light);
+  border-radius: 18px;
+}
+
+.card-heading {
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 22px;
+}
+
+.card-label {
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
+.card-title {
+  margin: 8px 0;
+  font-family: "Gowun Batang", serif;
+  color: var(--purple);
+  font-size: 28px;
+}
+
+#shareDate {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+#analysis {
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+#analysis h1,
+#analysis h2,
+#analysis h3,
+#analysis h4 {
+  font-family: "Gowun Batang", serif;
+  color: var(--purple);
+  margin-top: 28px;
+}
+
+#analysis h1 {
+  font-size: 25px;
+}
+
+#analysis h2 {
+  font-size: 21px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+#analysis h3 {
+  font-size: 18px;
+}
+
+#analysis table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
   margin: 15px 0;
 }
 
-.tag {
-  background: #fff8e9;
-  border: 1px solid #d8c39d;
-  border-radius: 30px;
-  padding: 7px 12px;
-  font-size: 11px;
-}
-
-.card-preview {
-  background: linear-gradient(150deg, #fffaf1, #f0e5d2);
-  border: 1px solid #c9ad7a;
-  border-radius: 18px;
-  padding: 25px 20px;
+#analysis th,
+#analysis td {
+  padding: 9px 11px;
+  border: 1px solid var(--line);
   text-align: center;
-  white-space: pre-line;
+  white-space: nowrap;
 }
 
-.card-preview h3 {
-  font-size: 25px;
-  letter-spacing: 2px;
-  margin: 10px 0;
+#analysis th {
+  background: #f5efe4;
+  color: var(--purple);
 }
 
-.card-preview p {
-  color: #594d62;
-  font-size: 12px;
-  line-height: 1.9;
+#analysis blockquote {
+  margin: 15px 0;
+  padding: 10px 15px;
+  background: #f7f1e8;
+  border-left: 3px solid var(--gold);
 }
 
-.actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 14px;
+#analysis li {
+  margin: 6px 0;
+}
+
+#analysis pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.share-area {
+  margin-top: 26px;
+  padding-top: 24px;
+  border-top: 1px dashed var(--gold-light);
+  text-align: center;
 }
 
 #qrcode {
-  display: grid;
-  place-items: center;
-  min-height: 100px;
-  margin: 16px auto 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 260px;
+  margin: 15px auto;
+  overflow: hidden;
+}
+
+#qrcode img,
+#qrcode canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
 }
 
 footer {
   text-align: center;
-  color: #95889a;
-  font-size: 10px;
-  line-height: 1.9;
-  margin-top: 25px;
+  padding: 15px;
+  color: var(--muted);
+  font-size: 11px;
 }
 
-@media (max-width: 560px) {
-  .grid, .grid-three, .topic-grid {
+@media (max-width: 480px) {
+  .row {
     grid-template-columns: 1fr;
+    gap: 0;
   }
 
-  .topic {
-    min-height: 0;
-  }
-
-  .pillars {
-    min-width: 430px;
+  #analysis {
+    font-size: 13px;
   }
 }
 </style>
 </head>
 
 <body>
-<div class="container">
 
 <header>
-  <div class="moon">☾ ✦ ☽</div>
+  <div class="stars">✧ · ✦ · ✧</div>
   <h1>말랑한 운명</h1>
-  <div class="brand">무학여고 솔리언 또래 상담반</div>
-  <p class="quote" id="quote"></p>
+  <div class="subtitle">무학여고 솔리언 또래 상담반</div>
+  <p class="quote">"운명은 정답이 아니라, 나를 알아가는 하나의 이야기."</p>
 </header>
 
-<section class="panel" id="inputPanel">
-  <div class="eyebrow">01 — YOUR BIRTH</div>
-  <h2>태어난 순간을 알려줘</h2>
+<main>
 
-  <div class="grid">
-    <div>
-      <label for="birthDate">생년월일</label>
-      <input type="date" id="birthDate" required>
-    </div>
+<section class="panel" id="inputSection">
+  <h2>✧ 나의 사주 알아보기</h2>
 
-    <div>
-      <label for="calendar">달력 기준</label>
-      <select id="calendar">
-        <option value="solar">양력</option>
-        <option value="lunar">음력</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="grid-three">
-    <div>
-      <label for="birthHour">태어난 시</label>
-      <select id="birthHour"></select>
-    </div>
-
-    <div>
-      <label for="birthMinute">태어난 분</label>
-      <select id="birthMinute"></select>
-    </div>
-
-    <div>
-      <label for="timeAccuracy">시간 정확도</label>
-      <select id="timeAccuracy">
-        <option>정확히 알아요</option>
-        <option>대략 알아요</option>
-        <option>잘 모르겠어요</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="grid">
-    <div>
-      <label for="country">태어난 국가</label>
-      <select id="country">
-        <option value="KR">대한민국</option>
-        <option value="JP">일본</option>
-        <option value="CN">중국</option>
-        <option value="US">미국</option>
-        <option value="other">기타</option>
-      </select>
-    </div>
-
-    <div>
-      <label for="birthPlace">태어난 지역</label>
-      <input id="birthPlace" placeholder="예: 서울, 부산, 인천">
-    </div>
-  </div>
-
-  <label>성별</label>
-  <div class="gender-options">
-    <label><input type="radio" name="gender" value="female" checked> 여성</label>
-    <label><input type="radio" name="gender" value="male"> 남성</label>
-    <label><input type="radio" name="gender" value="none"> 선택 안 함</label>
-  </div>
-
-  <p class="help">
-    입력한 출생 정보는 이 코드에서 서버로 전송하지 않아요.
-    단, 이 버전은 실제 만세력 계산 엔진이 연결되지 않은 시제품이에요.
-    음력 변환, 절기 기준, 출생지의 시간 보정은 아직 지원하지 않아요.
+  <p class="description">
+    태어난 날짜와 시간을 입력하면 사주 원국과 전통적인 사주 해석 정보를 보여 줘.
   </p>
 
-  <div class="divider"></div>
+  <form id="birthForm">
 
-  <div class="eyebrow">02 — CHOOSE YOUR STORY</div>
-  <h2>어떤 이야기가 궁금해?</h2>
+    <label for="birthDate">생년월일</label>
+    <input type="date" id="birthDate" required>
 
-  <div class="topic-grid">
-    <button class="topic active" data-topic="love">
-      <strong>♡ 연애운</strong>
-      <span>앞으로 1년의 인연과 관계</span>
-    </button>
+    <label for="calendarType">날짜 종류</label>
+    <select id="calendarType">
+      <option value="solar">양력</option>
+      <option value="lunar">음력</option>
+    </select>
 
-    <button class="topic" data-topic="study">
-      <strong>✦ 학업운</strong>
-      <span>과목별 공부법과 개선 방안</span>
-    </button>
+    <div class="checkline" id="leapRow" hidden>
+      <input type="checkbox" id="isLeapMonth">
+      <label for="isLeapMonth">윤달에 태어났어요.</label>
+    </div>
 
-    <button class="topic" data-topic="next">
-      <strong>☾ 내년 운세</strong>
-      <span>시험과 대인관계 중심</span>
-    </button>
-  </div>
+    <div class="row">
+      <div>
+        <label for="birthTime">출생 시간</label>
+        <input type="time" id="birthTime" value="12:00" required>
+      </div>
 
-  <button class="primary" id="readButton">
-    내 이야기 펼쳐보기 ✧
-  </button>
-</section>
+      <div>
+        <label for="gender">성별</label>
+        <select id="gender">
+          <option value="여">여성</option>
+          <option value="남">남성</option>
+        </select>
+      </div>
+    </div>
 
-<section id="resultPanel" class="hidden">
+    <label for="birthPlace">출생 지역</label>
+    <select id="birthPlace">
+      <option value="126.9780">서울</option>
+      <option value="129.0756">부산</option>
+      <option value="128.6014">대구</option>
+      <option value="126.7052">인천</option>
+      <option value="126.8526">광주</option>
+      <option value="127.3845">대전</option>
+      <option value="129.3114">울산</option>
+      <option value="127.5">그 외 지역(한국 평균)</option>
+    </select>
 
-  <div class="panel">
-    <div class="eyebrow">03 — YOUR STORY</div>
-    <h2 id="resultTitle">너를 위한 작은 기록</h2>
-
-    <div class="tags" id="tags"></div>
+    <div class="checkline">
+      <input type="checkbox" id="useLocalTime">
+      <label for="useLocalTime">출생 지역의 경도를 이용한 시간 보정 적용</label>
+    </div>
 
     <div class="notice">
-      이 사이트의 운세는 재미와 자기성찰을 위한 콘텐츠예요.
-      실제 미래, 성적, 연애 상대의 외모나 성격을 예측하지 않아요.
-      현재 버전은 실제 사주 원국을 계산하지 않으므로 아래 만세력 표는 예시예요.
-    </div>
-  </div>
-
-  <div class="panel">
-    <div class="eyebrow">04 — FOUR PILLARS</div>
-    <h2>만세력 표</h2>
-
-    <div class="table-scroll">
-      <table class="pillars">
-        <thead>
-          <tr>
-            <th>구분</th>
-            <th>년주</th>
-            <th>월주</th>
-            <th>일주</th>
-            <th>시주</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <th>천간</th>
-            <td><span class="hanja">—</span><small>년간</small></td>
-            <td><span class="hanja">—</span><small>월간</small></td>
-            <td><span class="hanja">—</span><small>일간</small></td>
-            <td><span class="hanja">—</span><small>시간</small></td>
-          </tr>
-
-          <tr>
-            <th>지지</th>
-            <td><span class="hanja">—</span><small>년지</small></td>
-            <td><span class="hanja">—</span><small>월지</small></td>
-            <td><span class="hanja">—</span><small>일지</small></td>
-            <td><span class="hanja">—</span><small>시지</small></td>
-          </tr>
-        </tbody>
-      </table>
+      사주 계산 결과는 전통적인 해석 체계에 따른 참고 정보야.
+      실제 성격이나 연애, 성적, 미래를 과학적으로 확정하거나 예측하지는 않아.
+      정확한 주소는 입력할 필요가 없어.
     </div>
 
-    <p class="help">
-      실제 사주 원국을 표시하려면 만세력 계산 기능을 별도로 연결해야 해요.
-    </p>
-  </div>
+    <button class="primary" type="submit">나의 사주 확인하기 ✧</button>
+  </form>
 
-  <div class="panel">
-    <div class="eyebrow">05 — SYMBOLS</div>
-    <h2>천간·지지·일지 이야기</h2>
-
-    <div class="animal-card">
-      <div class="animal-icon">🐉</div>
-      <div>
-        <div class="mini-label">동물 상징의 예시</div>
-        <h3>진(辰) · 용의 상징</h3>
-        <p>
-          전통적인 상징 풀이에서 진(辰)은 용의 이미지와 연결돼요.
-          갑진(甲辰)을 청룡으로 표현하기도 해요.
-          다만 실제 일지가 진인지 여부는 정확한 만세력 계산을 통해 확인해야 해요.
-        </p>
-      </div>
-    </div>
-
-    <div class="result-card">
-      <div class="mini-label">천간</div>
-      <h3>겉으로 드러나는 기운</h3>
-      <p>
-        천간은 갑·을·병·정·무·기·경·신·임·계의 열 글자로 이루어져요.
-        오행과 음양을 바탕으로 성질을 해석하지만, 한 글자만으로 사람의 성격을 확정할 수는 없어요.
-      </p>
-    </div>
-
-    <div class="result-card">
-      <div class="mini-label">지지</div>
-      <h3>바탕과 계절의 상징</h3>
-      <p>
-        지지는 자·축·인·묘·진·사·오·미·신·유·술·해의 열두 글자예요.
-        동물 상징과 계절, 지장간 등을 활용해 해석해요.
-      </p>
-    </div>
-
-    <div class="result-card">
-      <div class="mini-label">십성</div>
-      <h3>관계와 역할의 상징</h3>
-      <p>
-        십성은 일간을 기준으로 다른 오행과의 관계를 분류하는 체계예요.
-        정확한 사주 원국을 계산해야 개인별 십성을 표시할 수 있어요.
-      </p>
-    </div>
-
-    <div class="result-card">
-      <div class="mini-label">신살과 흉살</div>
-      <h3>전통적인 보조 해석</h3>
-      <p>
-        신살은 특정 규칙으로 찾는 보조 상징이며, 학파에 따라 적용 방식이 달라질 수 있어요.
-        흉살이라는 이름만으로 불행이 정해지는 것은 아니에요.
-        개인별 신살을 표시하려면 원국과 적용 기준을 먼저 계산해야 해요.
-      </p>
-    </div>
-  </div>
-
-  <div class="panel">
-    <div class="eyebrow">06 — YOUR FORTUNE</div>
-    <h2 id="fortuneHeading">오늘의 운세</h2>
-    <div id="fortuneContent"></div>
-  </div>
-
-  <div class="panel">
-    <div class="eyebrow">07 — MOON CARD</div>
-    <h2>나만의 결과 카드</h2>
-
-    <div class="card-preview" id="fortuneCard">
-      <div class="mini-label">무학여고 솔리언 또래 상담반</div>
-      <h3>말랑한 운명</h3>
-      <p id="cardText"></p>
-      <div style="color:var(--gold);letter-spacing:5px;margin-top:18px">
-        ✧ ── ☾ ── ✧
-      </div>
-    </div>
-
-    <div class="actions">
-      <button class="secondary" id="saveButton">이미지 저장</button>
-      <button class="secondary" id="againButton">처음으로</button>
-    </div>
-
-    <div id="qrcode"></div>
-
-    <p class="help" id="qrHelp">
-      QR 코드를 통한 결과 공유는 사이트를 인터넷에 공개한 뒤 테스트해야 해요.
-    </p>
-  </div>
+  <div id="status" role="status"></div>
 </section>
 
+<section class="panel" id="resultSection">
+
+  <div class="result-card" id="resultCard">
+    <div class="card-heading">
+      <div class="card-label">YOUR SAJU ARCHIVE</div>
+      <div class="card-title">말랑한 운명</div>
+      <div id="shareDate"></div>
+    </div>
+
+    <div id="analysis"></div>
+
+    <div class="notice">
+      이 결과는 전통적인 명리학 계산과 해석을 바탕으로 한 참고 자료야.
+      중요한 선택은 실제 상황과 자신의 판단을 중심으로 결정해 줘.
+    </div>
+  </div>
+
+  <div class="share-area">
+    <h2>✧ 결과 가져가기</h2>
+
+    <p class="description">
+      QR 코드를 인식하면 공유된 결과를 다시 볼 수 있어.
+      생년월일과 출생 지역을 공유 링크에 그대로 넣지는 않아.
+    </p>
+
+    <div id="qrcode"></div>
+    <div id="qrStatus" role="status"></div>
+
+    <div class="button-row">
+      <button class="secondary" id="saveImage" type="button">
+        결과 카드 이미지 저장
+      </button>
+
+      <button class="secondary" id="copyLink" type="button">
+        결과 링크 복사
+      </button>
+
+      <button class="secondary" id="backButton" type="button">
+        처음으로
+      </button>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
 <footer>
-  말랑한 운명 · 무학여고 솔리언 또래 상담반<br>
-  재미와 자기성찰을 위한 콘텐츠이며 실제 상담이나 진단을 대신하지 않아요.
+  무학여고 솔리언 또래 상담반 · 말랑한 운명<br>
+  재미와 자기 탐색을 위한 콘텐츠
 </footer>
 
-</div>
+<script type="module">
+const inputSection = document.getElementById("inputSection");
+const resultSection = document.getElementById("resultSection");
+const statusBox = document.getElementById("status");
+const qrStatus = document.getElementById("qrStatus");
+const analysisBox = document.getElementById("analysis");
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+let currentShareUrl = "";
+let currentMarkdown = "";
 
-<script>
-const quotes = [
-  "운명은 정해진 답보다 새로운 질문에 가까워.",
-  "너를 알아가는 일은 언제나 현재진행형이야.",
-  "작은 선택 하나가 내일의 분위기를 바꾸기도 해.",
-  "오늘의 너에게도 아직 발견하지 못한 가능성이 있어.",
-  "모든 계절에는 각자의 속도가 있어."
-];
-
-document.getElementById("quote").textContent =
-  quotes[Math.floor(Math.random() * quotes.length)];
-
-const hourSelect = document.getElementById("birthHour");
-const minuteSelect = document.getElementById("birthMinute");
-
-hourSelect.innerHTML = '<option value="">모름</option>';
-minuteSelect.innerHTML = '<option value="">모름</option>';
-
-for (let h = 0; h < 24; h++) {
-  const option = document.createElement("option");
-  option.value = String(h).padStart(2, "0");
-  option.textContent = String(h).padStart(2, "0") + "시";
-  hourSelect.appendChild(option);
+function showStatus(message) {
+  statusBox.textContent = message;
 }
 
-for (let m = 0; m < 60; m++) {
-  const option = document.createElement("option");
-  option.value = String(m).padStart(2, "0");
-  option.textContent = String(m).padStart(2, "0") + "분";
-  minuteSelect.appendChild(option);
+function base64UrlEncode(bytes) {
+  let binary = "";
+
+  for (const byte of bytes) {
+    binary += String.fromCharCode(byte);
+  }
+
+  return btoa(binary)
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/g, "");
 }
 
-let selectedTopic = "love";
-let currentCard = null;
+function base64UrlDecode(value) {
+  let base64 = value
+    .replace(/-/g, "+")
+    .replace(/_/g, "/");
 
-document.querySelectorAll(".topic").forEach(button => {
-  button.addEventListener("click", () => {
-    document.querySelectorAll(".topic").forEach(item =>
-      item.classList.remove("active")
-    );
-
-    button.classList.add("active");
-    selectedTopic = button.dataset.topic;
-  });
-});
-
-const stories = {
-  love: {
-    title: "연애운 · 인연과 관계",
-    tags: ["대화", "자기 존중", "천천히 알아가기"],
-    sections: [
-      {
-        title: "어떤 상황에서 만날까?",
-        text: "재미용 상상 풀이로는 학교 행사, 동아리 활동, 친구의 친구처럼 공통 관심사가 있는 환경을 만남의 장면으로 떠올려 볼 수 있어요. 특정 장소나 시기에 실제 인연이 생긴다는 뜻은 아니에요."
-      },
-      {
-        title: "상대의 외모와 분위기",
-        text: "차분하게 대화를 이어 가고 자기 관심사를 가진 사람이라는 이미지를 상상해 볼 수 있어요. 외모나 성격을 사주만으로 실제 예측할 수는 없으니, 이 부분은 재미로 즐기는 캐릭터 설정에 가까워요."
-      },
-      {
-        title: "앞으로 1년의 관계 조언",
-        text: "호감이 생기면 상대의 마음을 혼자 추측하기보다 작은 대화를 통해 알아가 보세요. 상대가 나를 존중하는지, 거절과 경계를 편하게 받아들이는지도 살펴보는 것이 중요해요."
-      }
-    ],
-    advice: "상대에게 잘 보이는 것만큼 내 마음과 일상을 지키는 것도 중요해요."
-  },
-
-  study: {
-    title: "학업운 · 공부 습관과 개선",
-    tags: ["회상 연습", "오답 분석", "작은 목표"],
-    sections: [
-      {
-        title: "과목별 공부 방향",
-        text: "생년월일만으로 잘할 과목을 알아낼 수는 없어요. 언어 과목은 핵심 문장 요약과 빈칸 회상, 수학은 풀이 과정을 말로 설명하기, 과학은 개념도와 원인·결과 연결, 사회와 역사는 비교표와 인과관계 정리를 활용해 보세요."
-      },
-      {
-        title: "실천 가능한 공부 계획",
-        text: "첫째, 오늘 배운 내용을 책을 덮고 5분 동안 떠올려 보세요. 둘째, 틀린 문제에 틀린 이유를 한 문장으로 적으세요. 셋째, 이틀 뒤와 일주일 뒤에 다시 풀어 보세요. 어떤 유형에서 실수가 반복되는지 기록하면 개선점을 찾기 쉬워요."
-      },
-      {
-        title: "시험 기간에 주의할 점",
-        text: "시험 직전에 모든 내용을 새로 시작하기보다 범위를 작은 단위로 나누세요. 이해가 부족한 개념과 암기가 필요한 내용을 구분하고, 수면과 휴식도 일정에 포함해 주세요."
-      }
-    ],
-    advice: "운세보다 강력한 건 반복 가능한 계획이에요. 오늘 할 일을 작게 정해 시작해 보세요."
-  },
-
-  next: {
-    title: "내년 운세 · 시험과 대인관계",
-    tags: ["준비", "소통", "균형"],
-    sections: [
-      {
-        title: "시험과 학업",
-        text: "미래의 시험 결과를 사주로 확정할 수는 없어요. 내년을 준비하는 방법으로는 시험 일정을 미리 나누고 취약 단원을 일찍 발견하는 태도가 중요해요. 시험 직전에는 새 자료를 계속 늘리기보다 오답과 핵심 개념을 반복해 보세요."
-      },
-      {
-        title: "친구와 대인관계",
-        text: "친구 사이에 오해가 생기면 추측만으로 결론을 내리지 말고, 실제로 있었던 일과 내 해석을 구분해 차분히 물어보세요. 모든 사람과 잘 지내야 한다는 부담을 내려놓고 서로 존중하는 관계에 시간을 쓰는 것도 중요해요."
-      },
-      {
-        title: "한 해를 보내는 방법",
-        text: "한 달에 한 번 공부, 관계, 휴식에서 잘된 점 하나와 바꿀 점 하나를 기록해 보세요. 계획이 어긋나더라도 실패로 단정하지 말고 원인을 찾아 다음 계획을 조정해 보세요."
-      }
-    ],
-    advice: "내년을 바꾸는 건 미래에 대한 확신보다 지금부터 쌓는 작은 준비예요."
+  while (base64.length % 4) {
+    base64 += "=";
   }
-};
 
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, char => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  })[char]);
+  const binary = atob(base64);
+
+  return Uint8Array.from(
+    binary,
+    character => character.charCodeAt(0)
+  );
 }
 
-function renderStory(story) {
-  document.getElementById("fortuneHeading").textContent = story.title;
+async function compressText(text) {
+  if (!("CompressionStream" in window)) {
+    throw new Error("이 브라우저는 압축 공유를 지원하지 않아.");
+  }
 
-  document.getElementById("tags").innerHTML =
-    story.tags.map(tag =>
-      `<span class="tag">${escapeHTML(tag)}</span>`
-    ).join("");
+  const stream = new Blob([text])
+    .stream()
+    .pipeThrough(new CompressionStream("gzip"));
 
-  document.getElementById("fortuneContent").innerHTML =
-    story.sections.map((section, index) => `
-      <div class="result-card">
-        <div class="mini-label">READING 0${index + 1}</div>
-        <h3>${escapeHTML(section.title)}</h3>
-        <p>${escapeHTML(section.text)}</p>
-      </div>
-    `).join("") + `
-      <div class="notice" style="margin-top:12px">
-        ✦ 오늘의 조언　${escapeHTML(story.advice)}
-      </div>
-    `;
+  const buffer = await new Response(stream).arrayBuffer();
 
-  const summary = story.sections[0].text +
-    "\n\n오늘의 조언: " + story.advice;
-
-  document.getElementById("cardText").textContent =
-    story.title + "\n\n" + summary;
-
-  currentCard = {
-    title: story.title,
-    tags: story.tags,
-    summary: summary
-  };
+  return base64UrlEncode(new Uint8Array(buffer));
 }
 
-document.getElementById("readButton").addEventListener("click", () => {
-  const birthDate = document.getElementById("birthDate").value;
-
-  if (!birthDate) {
-    alert("생년월일을 입력해 주세요.");
-    return;
+async function decompressText(value) {
+  if (!("DecompressionStream" in window)) {
+    throw new Error("이 브라우저는 압축된 결과를 열 수 없어.");
   }
 
-  const story = stories[selectedTopic];
+  const bytes = base64UrlDecode(value);
 
-  renderStory(story);
+  const stream = new Blob([bytes])
+    .stream()
+    .pipeThrough(new DecompressionStream("gzip"));
 
-  document.getElementById("inputPanel").classList.add("hidden");
-  document.getElementById("resultPanel").classList.remove("hidden");
+  return await new Response(stream).text();
+}
 
-  document.getElementById("resultPanel").scrollIntoView({
-    behavior: "smooth"
-  });
-
-  generateQR();
-});
-
-function generateQR() {
-  const qrBox = document.getElementById("qrcode");
-  qrBox.innerHTML = "";
-
-  if (!window.QRCode) {
-    qrBox.textContent = "QR 기능을 불러오지 못했어요.";
-    return;
+function renderMarkdown(markdown) {
+  if (!window.marked || !window.DOMPurify) {
+    throw new Error("결과 표시 라이브러리를 불러오지 못했어.");
   }
 
-  if (location.protocol === "file:") {
-    qrBox.textContent =
-      "사이트를 인터넷에 공개하면 QR 공유를 테스트할 수 있어요.";
-    return;
-  }
+  const html = window.marked.parse(markdown);
 
-  const url = new URL(location.href);
+  analysisBox.innerHTML = window.DOMPurify.sanitize(html);
+}
+
+function removePersonalBirthInfo(markdown) {
+  // 공유 결과에서 기본 정보 표를 제외해 생년월일 노출을 줄임.
+  return markdown
+    .replace(
+      /(^|\n)## 기본 정보[\s\S]*?(?=\n## |\s*$)/,
+      "\n"
+    )
+    .replace(/- 생년월일:.*\n/g, "\n");
+}
+
+async function createShareLink(markdown) {
+  const shareText = removePersonalBirthInfo(markdown);
+  const encoded = await compressText(shareText);
+
+  const url = new URL(window.location.href);
   url.search = "";
   url.hash = "";
+  url.searchParams.set("share", encoded);
 
-  if (currentCard) {
-    const encoded = btoa(
-      unescape(encodeURIComponent(JSON.stringify(currentCard)))
-    );
-
-    url.searchParams.set("card", encoded);
-  }
-
-  new QRCode(qrBox, {
-    text: url.toString(),
-    width: 100,
-    height: 100,
-    colorDark: "#352c40",
-    colorLight: "#ffffff",
-    correctLevel: QRCode.CorrectLevel.M
-  });
+  return url.toString();
 }
 
-document.getElementById("saveButton").addEventListener("click", async () => {
+function createQRCode(url) {
+  const container = document.getElementById("qrcode");
+  container.innerHTML = "";
+  qrStatus.textContent = "";
+
+  if (!window.QRCode) {
+    qrStatus.textContent =
+      "QR 라이브러리를 불러오지 못했어. 인터넷 연결을 확인해 줊.";
+    return;
+  }
+
+  try {
+    new QRCode(container, {
+      text: url,
+      width: 280,
+      height: 280,
+      colorDark: "#30263a",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.L
+    });
+
+    qrStatus.textContent =
+      "QR 코드가 만들어졌어. 휴대폰 카메라로 인식해 봐.";
+  } catch (error) {
+    console.error(error);
+
+    qrStatus.textContent =
+      "QR 생성에 실패했어. 결과 링크 복사 버튼을 이용해 줘.";
+  }
+}
+
+document.getElementById("calendarType").addEventListener("change", event => {
+  document.getElementById("leapRow").hidden =
+    event.target.value !== "lunar";
+});
+
+document.getElementById("birthForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  showStatus("만세력을 계산하고 있어. 잠시만 기다려 줘.");
+
+  try {
+    const { calculateSaju } =
+      await import("https://esm.sh/ssaju@0.2.0");
+
+    const dateValue = document.getElementById("birthDate").value;
+    const timeValue = document.getElementById("birthTime").value;
+
+    if (!dateValue || !timeValue) {
+      throw new Error("생년월일과 출생 시간을 모두 입력해 줘.");
+    }
+
+    const [year, month, day] =
+      dateValue.split("-").map(Number);
+
+    const [hour, minute] =
+      timeValue.split(":").map(Number);
+
+    const calendar =
+      document.getElementById("calendarType").value;
+
+    const gender =
+      document.getElementById("gender").value;
+
+    const longitude =
+      Number(document.getElementById("birthPlace").value);
+
+    const useLocalTime =
+      document.getElementById("useLocalTime").checked;
+
+    const input = {
+      year,
+      month,
+      day,
+      hour,
+      minute,
+      gender,
+      calendar,
+      leap: document.getElementById("isLeapMonth").checked,
+      timezone: "Asia/Seoul",
+      longitude,
+      applyLocalMeanTime: useLocalTime
+    };
+
+    const result = calculateSaju(input);
+
+    if (!result || typeof result.toMarkdown !== "function") {
+      throw new Error(
+        "만세력 계산 결과를 읽지 못했어. 라이브러리 응답을 확인해야 해."
+      );
+    }
+
+    const markdown = result.toMarkdown();
+
+    currentMarkdown = markdown;
+
+    renderMarkdown(markdown);
+
+    document.getElementById("shareDate").textContent =
+      "사주 계산 결과 · " + new Date().toLocaleDateString("ko-KR");
+
+    inputSection.style.display = "block";
+    resultSection.style.display = "block";
+
+    try {
+      currentShareUrl = await createShareLink(markdown);
+      createQRCode(currentShareUrl);
+    } catch (shareError) {
+      console.error(shareError);
+
+      currentShareUrl = "";
+      document.getElementById("qrcode").innerHTML = "";
+
+      qrStatus.textContent =
+        "사주 계산은 완료됐지만 QR 생성에 실패했어. 결과 이미지를 저장해 줘.";
+    }
+
+    showStatus("계산이 완료됐어!");
+
+    resultSection.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    showStatus(
+      "계산에 실패했어: " +
+      (error.message || "인터넷 연결이나 입력 정보를 확인해 줘.")
+    );
+  }
+});
+
+document.getElementById("saveImage").addEventListener("click", async () => {
   if (!window.html2canvas) {
-    alert("이미지 저장 기능을 불러오지 못했어요. 인터넷 연결을 확인해 주세요.");
+    alert("이미지 저장 기능을 불러오지 못했어.");
     return;
   }
 
   try {
     const canvas = await html2canvas(
-      document.getElementById("fortuneCard"),
-      { scale: 2, backgroundColor: null }
+      document.getElementById("resultCard"),
+      {
+        scale: 2,
+        backgroundColor: "#fffdf8",
+        useCORS: true
+      }
     );
 
     const link = document.createElement("a");
-    link.download = "말랑한-운명-결과카드.png";
+    link.download = "말랑한-운명-사주결과.png";
     link.href = canvas.toDataURL("image/png");
     link.click();
+
   } catch (error) {
-    alert("자동 저장이 제한됐어요. 화면을 캡처해 저장해 주세요.");
+    console.error(error);
+    alert("이미지 저장에 실패했어. 다시 시도해 줘.");
   }
 });
 
-document.getElementById("againButton").addEventListener("click", () => {
-  document.getElementById("resultPanel").classList.add("hidden");
-  document.getElementById("inputPanel").classList.remove("hidden");
+document.getElementById("copyLink").addEventListener("click", async () => {
+  if (!currentShareUrl) {
+    alert("먼저 사주를 계산해 줘.");
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(currentShareUrl);
+    alert("결과 링크를 복사했어!");
+  } catch (error) {
+    window.prompt("아래 링크를 복사해 줘.", currentShareUrl);
+  }
+});
+
+document.getElementById("backButton").addEventListener("click", () => {
+  resultSection.style.display = "none";
   document.getElementById("qrcode").innerHTML = "";
+  currentShareUrl = "";
+  currentMarkdown = "";
+  showStatus("");
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-/* QR 링크로 공유된 결과 카드 표시 */
-(function loadSharedCard() {
-  const encoded = new URLSearchParams(location.search).get("card");
+async function loadSharedResult() {
+  const params = new URLSearchParams(window.location.search);
+  const shared = params.get("share");
 
-  if (!encoded) return;
+  if (!shared) return;
 
   try {
-    const data = JSON.parse(
-      decodeURIComponent(escape(atob(encoded)))
-    );
+    const markdown = await decompressText(shared);
 
-    if (!data.title || !data.summary) return;
+    inputSection.style.display = "none";
+    resultSection.style.display = "block";
 
-    currentCard = data;
+    renderMarkdown(markdown);
 
-    document.getElementById("inputPanel").classList.add("hidden");
-    document.getElementById("resultPanel").classList.remove("hidden");
+    document.getElementById("shareDate").textContent =
+      "공유받은 사주 결과";
 
-    document.getElementById("fortuneHeading").textContent = data.title;
-    document.getElementById("cardText").textContent =
-      data.title + "\n\n" + data.summary;
+    document.getElementById("qrcode").innerHTML = "";
+    qrStatus.textContent =
+      "공유받은 결과야. 필요한 경우 이미지로 저장할 수 있어.";
 
-    document.getElementById("fortuneContent").innerHTML = `
-      <div class="result-card">
-        <h3>${escapeHTML(data.title)}</h3>
-        <p>${escapeHTML(data.summary)}</p>
-      </div>
-    `;
+    document.querySelector(".share-area h2").textContent =
+      "✧ 결과 저장하기";
 
-    document.getElementById("tags").innerHTML =
-      (data.tags || []).map(tag =>
-        `<span class="tag">${escapeHTML(tag)}</span>`
-      ).join("");
+    currentMarkdown = markdown;
+    currentShareUrl = window.location.href;
 
-    generateQR();
   } catch (error) {
-    /* 잘못된 공유 링크는 무시 */
+    console.error(error);
+
+    inputSection.style.display = "block";
+    resultSection.style.display = "none";
+
+    showStatus(
+      "공유 결과를 열지 못했어. QR 코드가 완전하게 인식됐는지 확인해 줘."
+    );
   }
-})();
+}
+
+loadSharedResult();
 </script>
+
 </body>
 </html>
